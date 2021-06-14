@@ -15,36 +15,18 @@ Model Header containing AccessToken
 
 
 
-# Group e-Invoicing
+# Group Events API v2
 
-## Temporary Process Initiation [/Invoicing/TempProcessInitiation]
-`POST` Process Initiation
+## Subscribers [/Subscribers]
+`GET` List Subscribers
 
-### Temporary Process Initiation [POST]
-
-<b>Request Body</b>
-|Property|Description|Type|Max Length|Notes|Constraint|
-|--------|-----------|----|----------|-----|----------|
-|TID|Token ID|`string`||||
-|<b>InnerBody</b>||`object`||||
-|TradingEntityId|Trading Entity ID|`string`||||
-|SiteCode|Site Code|`string`||||
-|DocRef|Document Reference|`string`||||
-|InvoiceType|Invoice Type|`string`||||
-|UserName|User Name|`string`||||
-
+### List Subscribers [GET]
 
 <b>Response Data</b>
 |Property|Description|Type|Max Length|Notes|Constraint|
 |--------|-----------|----|----------|-----|----------|
-|TID|Token ID|`string`||||
-|<b>InnerBody</b>||`object`||||
-|TradingEntityId|Trading Entity ID|`string`||||
-|SiteCode|Site Code|`string`||||
-|DocRef|Document Reference|`string`||||
-|InvoiceType|Invoice Type|`string`||||
-|UserName|User Name|`string`||||
-|Status|Status|`string`||||
+|SubscriberId|Subscriber ID|`guid`||||
+|SubscriberName|Subscriber Name|`string`||||
 
 + Request (application/json)
     + Header
@@ -52,23 +34,12 @@ Model Header containing AccessToken
             AccessToken: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1bmlxdWVfbmFtZSI6ImRlZXBhayIsInN1YiI6ImRlZXBhayIsInJvbGUiOlsiNzk5YjhhNDEtYWI0ZS00MTBhLWI5MTktYzU3ZWFlMmFlMDI5IiwiZGVlcGFrIiwiQVNQLk5FVCBJZGVudGl0eSIsIjViNDE4ODE2LTI3ZjQtNGRlOC1iNmMyLTJlZTcxNjI3ZmJmYyIsIkFkbWluIiwiU3VwZXJBZG1pbiJdLCJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMjciLCJhdWQiOiI4MjkzNjk0MjJmNzA0NTIzODUxZDk4NTU2YjZkNTQyYiIsImV4cCI6MTQ1OTQzMjk0MSwibmJmIjoxNDU5NDMxMTQxfQ.JgPGxt0Ok5baKx0YMXlO6D9kUYrCWM-Kma9b9iMW8tg
 
 
-    + Attributes (TempProcessInit)
-
-
-+ Response 201 (application/json; charset=utf-8)
++ Response 200 (application/json; charset=utf-8)
     + Attributes 
-        + Data (TempProcessInitResponse)
-        + Response (201 CreateResponse)
+        + Data (array [Subscriber Detail])
+        + Pagination (Pagination)
+        + Response (200 SuccessResponse)
 
-+ Response 400 (application/json; charset=utf-8)
-    + Attributes 
-        + Data (TempProcessInitResponseBad)
-        + Response (400 BadRequestResponse)
-
-+ Response 404 (application/json; charset=utf-8)
-    + Attributes 
-        + Data (TempProcessInitResponseNF)
-        + Response (404 NotFoundResponse)
 
 
 
@@ -681,12 +652,9 @@ Web services to support creating, reading and updating ITAS Codes
 + groupUrl: /kvpstore/groupC (string)
 
 
-## OutstandingInvoices List (object)
-+ RequestId: abc123 (string)
-+ DocRef: CP1515151 (string)
-+ TradingEntityId: JT (string)
-+ TrackId: xyz987 (string)
-+ CountryId: GBP (string)
+## Subscriber Detail (object)
++ SubscriberId: `5611a3c1-239d-eb11-8475-20677cddb4f3` (string)
++ SubscriberName: Subscriber One (string)
 
 ## Physicals Metadata (object)
 + Department (array [string])
