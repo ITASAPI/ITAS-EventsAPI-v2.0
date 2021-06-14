@@ -63,6 +63,9 @@ Model Header containing AccessToken
 + Response 200 (application/json; charset=utf-8)
     + Attributes (Subscriber Detail)
 
++ Response 405 (application/json)
+    + Attributes (405 MethodNotAllowed)
+
 
 ## Subscriber Create [/Subscribers/{SubscriberName}]
 `POST` Create a Subscriber
@@ -155,6 +158,9 @@ Model Header containing AccessToken
 + Response 200 (application/json; charset=utf-8)
     + Attributes (array [Topic Detail])
 
++ Response 405 (application/json)
+    + Attributes (405 MethodNotAllowed)
+
 
 
 ## Topic [/Topics/{TopicName}]
@@ -173,7 +179,7 @@ Model Header containing AccessToken
             AccessToken: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1bmlxdWVfbmFtZSI6ImRlZXBhayIsInN1YiI6ImRlZXBhayIsInJvbGUiOlsiNzk5YjhhNDEtYWI0ZS00MTBhLWI5MTktYzU3ZWFlMmFlMDI5IiwiZGVlcGFrIiwiQVNQLk5FVCBJZGVudGl0eSIsIjViNDE4ODE2LTI3ZjQtNGRlOC1iNmMyLTJlZTcxNjI3ZmJmYyIsIkFkbWluIiwiU3VwZXJBZG1pbiJdLCJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMjciLCJhdWQiOiI4MjkzNjk0MjJmNzA0NTIzODUxZDk4NTU2YjZkNTQyYiIsImV4cCI6MTQ1OTQzMjk0MSwibmJmIjoxNDU5NDMxMTQxfQ.JgPGxt0Ok5baKx0YMXlO6D9kUYrCWM-Kma9b9iMW8tg
 
 + Parameters
-    + TopicName (required, string, `2-20`) ... Identify specific topic name.
+    + TopicName (required, string, `2-220`) ... Identify specific topic name.
 
 
 + Response 200 (application/json; charset=utf-8)
@@ -324,6 +330,10 @@ Model Header containing AccessToken
 
             AccessToken: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1bmlxdWVfbmFtZSI6ImRlZXBhayIsInN1YiI6ImRlZXBhayIsInJvbGUiOlsiNzk5YjhhNDEtYWI0ZS00MTBhLWI5MTktYzU3ZWFlMmFlMDI5IiwiZGVlcGFrIiwiQVNQLk5FVCBJZGVudGl0eSIsIjViNDE4ODE2LTI3ZjQtNGRlOC1iNmMyLTJlZTcxNjI3ZmJmYyIsIkFkbWluIiwiU3VwZXJBZG1pbiJdLCJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMjciLCJhdWQiOiI4MjkzNjk0MjJmNzA0NTIzODUxZDk4NTU2YjZkNTQyYiIsImV4cCI6MTQ1OTQzMjk0MSwibmJmIjoxNDU5NDMxMTQxfQ.JgPGxt0Ok5baKx0YMXlO6D9kUYrCWM-Kma9b9iMW8tg
 
++ Parameters
+    + SubscriberId (required, guid, `5611a3c1-239d-eb11-8475-20677cddb4f3`) ... Identify specific subscriber ID.
+    + Topic (required, string, `2-220`) ... Identify specific topic.
+
 
 + Response 200 (application/json; charset=utf-8)
     + Attributes (Subscription Detail)
@@ -357,7 +367,7 @@ Model Header containing AccessToken
 
 + Parameters
     + SubscriberId (required, guid, `5611a3c1-239d-eb11-8475-20677cddb4f3`) ... Identify Subscriber Id.
-    + Topic%20 (required, string, `2-20`) ... Identify Topic.
+    + Topic%20 (required, string, `2-220`) ... Identify Topic.
 
 + Response 200 (application/json; charset=utf-8)
     + Attributes (Subscription Detail)
@@ -394,7 +404,7 @@ Model Header containing AccessToken
 
 + Parameters
     + SubscriberId (required, guid, `5611a3c1-239d-eb11-8475-20677cddb4f3`) ... Identify Subscriber Id.
-    + Topic%20%20 (required, string, `2-20`) ... Identify Topic.
+    + Topic%20%20 (required, string, `2-220`) ... Identify Topic.
 
 + Response 200 (application/json; charset=utf-8)
     + Attributes (Subscription Detail)
@@ -433,6 +443,150 @@ Model Header containing AccessToken
 
 + Response 200 (application/json; charset=utf-8)
     + Attributes (array [Subscription Detail])
+
++ Response 400 (application/json)
+    + Attributes (400 BadRequestResponse)
+
++ Response 405 (application/json)
+    + Attributes (405 MethodNotAllowed)
+
+
+
+# Group Messages
+
+## Message Read [/Messages/{SubscriberId}/{Timeout}]
+`GET` Read Message
+
+### Read Message [GET]
+
+<b>URI Parameters</b>
+|Property|Description|Type|Max Length|Notes|Constraint|
+|--------|-----------|----|----------|-----|----------|
+|SubscriberId|Subscriber ID|`guid`|||Required|
+|Timeout|Timeout in seconds|`number`||||
+
+<b>Response Data</b>
+|Property|Description|Type|Max Length|Notes|Constraint|
+|--------|-----------|----|----------|-----|----------|
+|MessageId|Message ID|`guid`||||
+|Topic|Topic|`string`||||
+|MessageBody|Message Body|`object`||||
+|EnqueueTime|Enqueue Time|`datetime`||||
+
++ Request (application/json)
+    + Header
+
+            AccessToken: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1bmlxdWVfbmFtZSI6ImRlZXBhayIsInN1YiI6ImRlZXBhayIsInJvbGUiOlsiNzk5YjhhNDEtYWI0ZS00MTBhLWI5MTktYzU3ZWFlMmFlMDI5IiwiZGVlcGFrIiwiQVNQLk5FVCBJZGVudGl0eSIsIjViNDE4ODE2LTI3ZjQtNGRlOC1iNmMyLTJlZTcxNjI3ZmJmYyIsIkFkbWluIiwiU3VwZXJBZG1pbiJdLCJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMjciLCJhdWQiOiI4MjkzNjk0MjJmNzA0NTIzODUxZDk4NTU2YjZkNTQyYiIsImV4cCI6MTQ1OTQzMjk0MSwibmJmIjoxNDU5NDMxMTQxfQ.JgPGxt0Ok5baKx0YMXlO6D9kUYrCWM-Kma9b9iMW8tg
+
++ Parameters
+    + SubscriberId (required, guid, `5611a3c1-239d-eb11-8475-20677cddb4f3`) ... Identify specific subscriber ID.
+    + Timeout (string, `?timeout=5`) ... include timeout in seconds.
+
+
++ Response 200 (application/json; charset=utf-8)
+    + Attributes (Message Detail)
+
++ Response 204 (application/json; charset=utf-8)
+
++ Response 405 (application/json)
+    + Attributes (405 MethodNotAllowed)
+
+
+
+## Message Create [/Messages/{Topic}]
+`POST` Create a Message on the queue
+
+### Create Message [POST]
+
+<b>URI Parameters</b>
+|Property|Description|Type|Max Length|Notes|Constraint|
+|--------|-----------|----|----------|-----|----------|
+|Topic|Topic|`string`|||Required|
+
+
+<b>Request Body Example</b>
+|Property|Description|Type|Max Length|Notes|Constraint|
+|--------|-----------|----|----------|-----|----------|
+|TID|TID|`string`|||Required|
+|Topic|Topic|`string`|||Required|
+|InnerBody|Inner Body|`object`|||Required|
+
++ Request (application/json)
+    + Header
+
+            AccessToken:Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1bmlxdWVfbmFtZSI6ImRlZXBhayIsInN1YiI6ImRlZXBhayIsInJvbGUiOlsiNzk5YjhhNDEtYWI0ZS00MTBhLWI5MTktYzU3ZWFlMmFlMDI5IiwiZGVlcGFrIiwiQVNQLk5FVCBJZGVudGl0eSIsIjViNDE4ODE2LTI3ZjQtNGRlOC1iNmMyLTJlZTcxNjI3ZmJmYyIsIkFkbWluIiwiU3VwZXJBZG1pbiJdLCJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMjciLCJhdWQiOiI4MjkzNjk0MjJmNzA0NTIzODUxZDk4NTU2YjZkNTQyYiIsImV4cCI6MTQ1OTQzMjk0MSwibmJmIjoxNDU5NDMxMTQxfQ.JgPGxt0Ok5baKx0YMXlO6D9kUYrCWM-Kma9b9iMW8tg
+
+    + Attributes (MessageBody Create)
+
++ Parameters
+    + Topic (required, string, `2-220`) ... Identify topic.
+
++ Response 201 (application/json; charset=utf-8)
+
++ Response 400 (application/json)
+    + Attributes (400 BadRequestResponse)
+
++ Response 405 (application/json)
+    + Attributes (405 MethodNotAllowed)
+
+
+## Message Delete [/Messages/{SubscriberId}/{MessageId}]
+`DELETE` Delete Message
+
+### Delete Message [DELETE]
+
+<b>URI Parameters</b>
+|Property|Description|Type|Max Length|Notes|Constraint|
+|--------|-----------|----|----------|-----|----------|
+|SubscriberId|Subscriber ID|`guid`|||Required|
+|MessageId|Message ID|`string`|||Required|
+
+
++ Request (application/json)
+    + Header
+
+            AccessToken:Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1bmlxdWVfbmFtZSI6ImRlZXBhayIsInN1YiI6ImRlZXBhayIsInJvbGUiOlsiNzk5YjhhNDEtYWI0ZS00MTBhLWI5MTktYzU3ZWFlMmFlMDI5IiwiZGVlcGFrIiwiQVNQLk5FVCBJZGVudGl0eSIsIjViNDE4ODE2LTI3ZjQtNGRlOC1iNmMyLTJlZTcxNjI3ZmJmYyIsIkFkbWluIiwiU3VwZXJBZG1pbiJdLCJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMjciLCJhdWQiOiI4MjkzNjk0MjJmNzA0NTIzODUxZDk4NTU2YjZkNTQyYiIsImV4cCI6MTQ1OTQzMjk0MSwibmJmIjoxNDU5NDMxMTQxfQ.JgPGxt0Ok5baKx0YMXlO6D9kUYrCWM-Kma9b9iMW8tg
+
++ Parameters
+    + SubscriberId (required, guid, `5611a3c1-239d-eb11-8475-20677cddb4f3`) ... Identify specific subscriber ID.
+    + MessageId (required, guid, `cca4fd86-1bcd-eb11-847b-20677cddb4f2`) ... Identify specific message ID.
+
++ Response 200 (application/json; charset=utf-8)
+
++ Response 400 (application/json)
+    + Attributes (400 BadRequestResponse)
+
++ Response 405 (application/json)
+    + Attributes (405 MethodNotAllowed)
+
+
+## Message Reject [/Messages/{SubscriberId}/{MessageId}/Reject]
+`DELETE` Reject Message to Bad Message Queue
+
+### Reject Message [DELETE]
+
+<b>URI Parameters</b>
+|Property|Description|Type|Max Length|Notes|Constraint|
+|--------|-----------|----|----------|-----|----------|
+|SubscriberId|Subscriber ID|`guid`|||Required|
+|MessageId|Message ID|`string`|||Required|
+
+<b>Request Body Example</b>
+|Property|Description|Type|Max Length|Notes|Constraint|
+|--------|-----------|----|----------|-----|----------|
+|Reason|Reason|`string`|||Required|
+|ErrorMessage|Error Message|`string`||||
+
++ Request (application/json)
+    + Header
+
+            AccessToken:Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1bmlxdWVfbmFtZSI6ImRlZXBhayIsInN1YiI6ImRlZXBhayIsInJvbGUiOlsiNzk5YjhhNDEtYWI0ZS00MTBhLWI5MTktYzU3ZWFlMmFlMDI5IiwiZGVlcGFrIiwiQVNQLk5FVCBJZGVudGl0eSIsIjViNDE4ODE2LTI3ZjQtNGRlOC1iNmMyLTJlZTcxNjI3ZmJmYyIsIkFkbWluIiwiU3VwZXJBZG1pbiJdLCJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMjciLCJhdWQiOiI4MjkzNjk0MjJmNzA0NTIzODUxZDk4NTU2YjZkNTQyYiIsImV4cCI6MTQ1OTQzMjk0MSwibmJmIjoxNDU5NDMxMTQxfQ.JgPGxt0Ok5baKx0YMXlO6D9kUYrCWM-Kma9b9iMW8tg
+
++ Parameters
+    + SubscriberId (required, guid, `5611a3c1-239d-eb11-8475-20677cddb4f3`) ... Identify specific subscriber ID.
+    + MessageId (required, guid, `cca4fd86-1bcd-eb11-847b-20677cddb4f2`) ... Identify specific message ID.
+
++ Response 200 (application/json; charset=utf-8)
 
 + Response 400 (application/json)
     + Attributes (400 BadRequestResponse)
@@ -574,6 +728,31 @@ Model Header containing AccessToken
 + Skip: 400 (number) - number of records skipped
 + Returned: 146 (number) - actual number returned
 
+## InnerMessageBody (object)
++ Title: Contract Created (string)
++ Message: Contract created through Image of S00001.000 (string)
++ TradingEntityId: jt (string)
++ EntityId: S00001.000 (string)
++ EntityTypeID: 1 (string)
++ DisplayID: 2 (string)
++ SubmittedBy: JSMITH_HDM (string)
+
+## MessageBody (object)
++ TID: `TID-010` (string)
++ TopicId: `2-220` (string)
++ audit_trans: O (string)
++ InnerBody (InnerMessageBody)
+
+## MessageBody Create (object)
++ TID: `TID-010` (string)
++ Topic: `2-220` (string)
++ audit_trans: O (string)
++ InnerBody (InnerMessageBody)
+
+## Message Detail (object)
++ MessageId: `cca4fd86-1bcd-eb11-847b-20677cddb4f2` (string)
++ Topic: `2-220` (string)
++ MessageBody (MessageBody)
 
 ## Subscriber Detail (object)
 + SubscriberId: `5611a3c1-239d-eb11-8475-20677cddb4f3` (string)
@@ -581,8 +760,8 @@ Model Header containing AccessToken
 
 ## Subscription Detail (object)
 + SubscriberId: `5611a3c1-239d-eb11-8475-20677cddb4f3` (string)
-+ Topic: `2-20` (string)
++ Topic: `2-220` (string)
 
 ## Topic Detail (object)
-+ TopicName: `2-20` (string)
++ TopicName: `2-220` (string)
 
