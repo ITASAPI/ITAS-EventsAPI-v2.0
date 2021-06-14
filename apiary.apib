@@ -98,7 +98,7 @@ Model Header containing AccessToken
     + Attributes (405 MethodNotAllowed)
 
 
-## Subscriber Delete [/Subscribers/{SubscriberId}]
+## Subscriber Delete [/Subscribers/{SubscriberId.}]
 `DELETE` Delete a Subscriber
 
 ### Delete Subscriber [DELETE]
@@ -135,55 +135,6 @@ Model Header containing AccessToken
 
 
 
-
-
-## Invoice Status [/Accounting/Invoicing/Status/{RequestId}]
-`PUT` Status of Invoice
-
-### Update Invoice Status [PUT]
-
-<b>URI Parameters</b>
-|Property|Description|Type|Max Length|Notes|Constraint|
-|--------|-----------|----|----------|-----|----------|
-|RequestId|Request ID|`string`|||Required|
-
-<b>Request Body</b>
-|Property|Description|Type|Max Length|Notes|Constraint|
-|--------|-----------|----|----------|-----|----------|
-|StatusStage|Status Stage|`string`||||
-|StatusNumber|Status Number|`string`||||
-|Status|Status|`string`|||`created`, `valid`, `sent`, `incomplete`, `complete` or `failed`|
-|StatusDetails|Status Details|`string`||||
-|TrackId|Track ID|`string`||||
-|TimeStamp|Time Stamp|`datetime`||||
-
-<b>Response Data</b>
-|Property|Description|Type|Max Length|Notes|Constraint|
-|--------|-----------|----|----------|-----|----------|
-|RequestId|Request ID|`string`||||
-
-
-+ Request (application/json)
-    + Header
-
-            AccessToken:Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1bmlxdWVfbmFtZSI6ImRlZXBhayIsInN1YiI6ImRlZXBhayIsInJvbGUiOlsiNzk5YjhhNDEtYWI0ZS00MTBhLWI5MTktYzU3ZWFlMmFlMDI5IiwiZGVlcGFrIiwiQVNQLk5FVCBJZGVudGl0eSIsIjViNDE4ODE2LTI3ZjQtNGRlOC1iNmMyLTJlZTcxNjI3ZmJmYyIsIkFkbWluIiwiU3VwZXJBZG1pbiJdLCJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMjciLCJhdWQiOiI4MjkzNjk0MjJmNzA0NTIzODUxZDk4NTU2YjZkNTQyYiIsImV4cCI6MTQ1OTQzMjk0MSwibmJmIjoxNDU5NDMxMTQxfQ.JgPGxt0Ok5baKx0YMXlO6D9kUYrCWM-Kma9b9iMW8tg
-
-    + Attributes (InvoiceStatusUpdate)
-
-
-+ Parameters
-    + RequestId (required, string, `abcd123`) ... Identify specific request ID.
-
-+ Response 200 (application/json; charset=utf-8)
-    + Attributes 
-        + Data (InvoiceStatus)
-        + Response (200 SuccessResponse)
-
-+ Response 400 (application/json)
-    + Attributes (400 StatusResponse)
-
-+ Response 404 (application/json)
-    + Attributes (404 RequestIdResponse)
 
 ## Sign XML [/Accounting/SignXml/{RequestId}]
 `POST` XML to be Signed
@@ -554,14 +505,6 @@ Web services to support creating, reading and updating ITAS Codes
 + Severity: Error (string)
 + Messages: `API5058 - Data : The mandatory field {fieldName} was missing.` (string)
 
-## 400 BadCertificateResponse (object)
-+ Response
-    + Value: 400 Failed (string)
-+ Messages (400 BadCertificateResponseDetail)
-
-## 400 BadCertificateResponseDetail (object)
-+ Severity: Error (string)
-+ Messages: `API5091 - API : There is no certificate/user for RequestId {RequestId}` (string)
 
 ## 400 StatusResponse (object)
 + Response
@@ -655,17 +598,6 @@ Web services to support creating, reading and updating ITAS Codes
 + UserName: JSMITH (string)
 + Status: Failed (string)
 + StatusMessage: `Other message from IGI` (string)
-
-## InvoiceStatus (object)
-+ RequestId: abc123 (string)
-
-## InvoiceStatusUpdate (object)
-+ StatusStage: `1 - InvoiceRequestQueueService` (string)
-+ StatusNumber: 500 (string)
-+ Status: Failed (string)
-+ StatusDetails: Internal Server Error (string)
-+ TrackId: 123 (string)
-+ TimeStamp: `2016-11-15T11:31:34` (string)
 
 ## KvpKey (object)
 + keyName: nameA (string)
