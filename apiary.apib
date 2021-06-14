@@ -35,6 +35,9 @@ Model Header containing AccessToken
 + Response 200 (application/json; charset=utf-8)
     + Attributes (array [Subscriber Detail])
 
++ Response 405 (application/json)
+    + Attributes (405 MethodNotAllowed)
+
 
 
 ## Subscriber [/Subscribers/{SubscriberId}]
@@ -131,7 +134,6 @@ Model Header containing AccessToken
     + Attributes (405 MethodNotAllowed)
 
 
-
 # Group Topics
 
 ## Topic List [/Topics]
@@ -176,6 +178,9 @@ Model Header containing AccessToken
 
 + Response 200 (application/json; charset=utf-8)
     + Attributes (Topic Detail)
+
++ Response 405 (application/json)
+    + Attributes (405 MethodNotAllowed)
 
 
 ## Topic Create [/Topics/{TopicName%20}]
@@ -244,6 +249,197 @@ Model Header containing AccessToken
 
 + Response 405 (application/json)
     + Attributes (405 MethodNotAllowed)
+
+
+
+# Group Subscriptions
+
+## Subscription List [/Subscriptions]
+`GET` List Subscriptions
+
+### List Subscriptions [GET]
+
+<b>Response Data</b>
+|Property|Description|Type|Max Length|Notes|Constraint|
+|--------|-----------|----|----------|-----|----------|
+|SubscriberId|Subscriber ID|`guid`||||
+|Topic|Topic|`string`||||
+
++ Request (application/json)
+    + Header
+
+            AccessToken: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1bmlxdWVfbmFtZSI6ImRlZXBhayIsInN1YiI6ImRlZXBhayIsInJvbGUiOlsiNzk5YjhhNDEtYWI0ZS00MTBhLWI5MTktYzU3ZWFlMmFlMDI5IiwiZGVlcGFrIiwiQVNQLk5FVCBJZGVudGl0eSIsIjViNDE4ODE2LTI3ZjQtNGRlOC1iNmMyLTJlZTcxNjI3ZmJmYyIsIkFkbWluIiwiU3VwZXJBZG1pbiJdLCJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMjciLCJhdWQiOiI4MjkzNjk0MjJmNzA0NTIzODUxZDk4NTU2YjZkNTQyYiIsImV4cCI6MTQ1OTQzMjk0MSwibmJmIjoxNDU5NDMxMTQxfQ.JgPGxt0Ok5baKx0YMXlO6D9kUYrCWM-Kma9b9iMW8tg
+
+
++ Response 200 (application/json; charset=utf-8)
+    + Attributes (array [Subscription Detail])
+
++ Response 405 (application/json)
+    + Attributes (405 MethodNotAllowed)
+
+
+## Subscriptions for Subscriber List [/Subscriptions/{SubscriberId}]
+`GET` List Subscriptions for Subscriber
+
+### List Subscriptions for Subscriber [GET]
+
+<b>Response Data</b>
+|Property|Description|Type|Max Length|Notes|Constraint|
+|--------|-----------|----|----------|-----|----------|
+|SubscriberId|Subscriber ID|`guid`||||
+|Topic|Topic|`string`||||
+
++ Request (application/json)
+    + Header
+
+            AccessToken: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1bmlxdWVfbmFtZSI6ImRlZXBhayIsInN1YiI6ImRlZXBhayIsInJvbGUiOlsiNzk5YjhhNDEtYWI0ZS00MTBhLWI5MTktYzU3ZWFlMmFlMDI5IiwiZGVlcGFrIiwiQVNQLk5FVCBJZGVudGl0eSIsIjViNDE4ODE2LTI3ZjQtNGRlOC1iNmMyLTJlZTcxNjI3ZmJmYyIsIkFkbWluIiwiU3VwZXJBZG1pbiJdLCJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMjciLCJhdWQiOiI4MjkzNjk0MjJmNzA0NTIzODUxZDk4NTU2YjZkNTQyYiIsImV4cCI6MTQ1OTQzMjk0MSwibmJmIjoxNDU5NDMxMTQxfQ.JgPGxt0Ok5baKx0YMXlO6D9kUYrCWM-Kma9b9iMW8tg
+
++ Parameters
+    + SubscriberId (required, guid, `5611a3c1-239d-eb11-8475-20677cddb4f3`) ... Identify specific Subscriber Id.
+
+
++ Response 200 (application/json; charset=utf-8)
+    + Attributes (array [Subscription Detail])
+
++ Response 400 (application/json)
+    + Attributes (400 BadRequestResponse)
+
++ Response 405 (application/json)
+    + Attributes (405 MethodNotAllowed)
+
+
+## Subscription for Subscriber [/Subscriptions/{SubscriberId/Topic}]
+`GET` Read Subscription for Subscriber 
+
+### Read Subscription for Subscriber [GET]
+
+<b>Response Data</b>
+|Property|Description|Type|Max Length|Notes|Constraint|
+|--------|-----------|----|----------|-----|----------|
+|SubscriberId|Subscriber ID|`guid`||||
+|Topic|Topic|`string`||||
+
++ Request (application/json)
+    + Header
+
+            AccessToken: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1bmlxdWVfbmFtZSI6ImRlZXBhayIsInN1YiI6ImRlZXBhayIsInJvbGUiOlsiNzk5YjhhNDEtYWI0ZS00MTBhLWI5MTktYzU3ZWFlMmFlMDI5IiwiZGVlcGFrIiwiQVNQLk5FVCBJZGVudGl0eSIsIjViNDE4ODE2LTI3ZjQtNGRlOC1iNmMyLTJlZTcxNjI3ZmJmYyIsIkFkbWluIiwiU3VwZXJBZG1pbiJdLCJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMjciLCJhdWQiOiI4MjkzNjk0MjJmNzA0NTIzODUxZDk4NTU2YjZkNTQyYiIsImV4cCI6MTQ1OTQzMjk0MSwibmJmIjoxNDU5NDMxMTQxfQ.JgPGxt0Ok5baKx0YMXlO6D9kUYrCWM-Kma9b9iMW8tg
+
+
++ Response 200 (application/json; charset=utf-8)
+    + Attributes (Subscription Detail)
+
++ Response 405 (application/json)
+    + Attributes (405 MethodNotAllowed)
+
+
+## Subscription for Subscriber Create [/Subscriptions/{SubscriberId/Topic%20}]
+`PUT` Create Subscription for Subscriber
+
+### Create Subscription for Subscriber [PUT]
+
+<b>URI Parameters</b>
+|Property|Description|Type|Max Length|Notes|Constraint|
+|--------|-----------|----|----------|-----|----------|
+|SubscriberId|Subscriber ID|`guid`|||Required|
+|Topic|Topic|`string`|||Required|
+
+<b>Response Data</b>
+|Property|Description|Type|Max Length|Notes|Constraint|
+|--------|-----------|----|----------|-----|----------|
+|SubscriberId|Subscriber ID|`guid`||||
+|Topic|Topic|`string`||||
+
+
++ Request (application/json)
+    + Header
+
+            AccessToken:Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1bmlxdWVfbmFtZSI6ImRlZXBhayIsInN1YiI6ImRlZXBhayIsInJvbGUiOlsiNzk5YjhhNDEtYWI0ZS00MTBhLWI5MTktYzU3ZWFlMmFlMDI5IiwiZGVlcGFrIiwiQVNQLk5FVCBJZGVudGl0eSIsIjViNDE4ODE2LTI3ZjQtNGRlOC1iNmMyLTJlZTcxNjI3ZmJmYyIsIkFkbWluIiwiU3VwZXJBZG1pbiJdLCJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMjciLCJhdWQiOiI4MjkzNjk0MjJmNzA0NTIzODUxZDk4NTU2YjZkNTQyYiIsImV4cCI6MTQ1OTQzMjk0MSwibmJmIjoxNDU5NDMxMTQxfQ.JgPGxt0Ok5baKx0YMXlO6D9kUYrCWM-Kma9b9iMW8tg
+
++ Parameters
+    + SubscriberId (required, guid, `5611a3c1-239d-eb11-8475-20677cddb4f3`) ... Identify Subscriber Id.
+    + Topic%20 (required, string, `2-20`) ... Identify Topic.
+
++ Response 200 (application/json; charset=utf-8)
+    + Attributes (Subscription Detail)
+
++ Response 400 (application/json)
+    + Attributes (400 BadRequestResponse)
+
++ Response 405 (application/json)
+    + Attributes (405 MethodNotAllowed)
+
+
+## Subscription for Subscriber Delete [/Subscriptions/{SubscriberId/Topic%20%20}]
+`DELETE` Delete Subscription for Subscriber
+
+### Delete Subscription for Subscriber [DELETE]
+
+<b>URI Parameters</b>
+|Property|Description|Type|Max Length|Notes|Constraint|
+|--------|-----------|----|----------|-----|----------|
+|SubscriberId|Subscriber ID|`guid`|||Required|
+|Topic|Topic|`string`|||Required|
+
+<b>Response Data</b>
+|Property|Description|Type|Max Length|Notes|Constraint|
+|--------|-----------|----|----------|-----|----------|
+|SubscriberId|Subscriber ID|`guid`||||
+|Topic|Topic|`string`||||
+
+
++ Request (application/json)
+    + Header
+
+            AccessToken:Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1bmlxdWVfbmFtZSI6ImRlZXBhayIsInN1YiI6ImRlZXBhayIsInJvbGUiOlsiNzk5YjhhNDEtYWI0ZS00MTBhLWI5MTktYzU3ZWFlMmFlMDI5IiwiZGVlcGFrIiwiQVNQLk5FVCBJZGVudGl0eSIsIjViNDE4ODE2LTI3ZjQtNGRlOC1iNmMyLTJlZTcxNjI3ZmJmYyIsIkFkbWluIiwiU3VwZXJBZG1pbiJdLCJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMjciLCJhdWQiOiI4MjkzNjk0MjJmNzA0NTIzODUxZDk4NTU2YjZkNTQyYiIsImV4cCI6MTQ1OTQzMjk0MSwibmJmIjoxNDU5NDMxMTQxfQ.JgPGxt0Ok5baKx0YMXlO6D9kUYrCWM-Kma9b9iMW8tg
+
++ Parameters
+    + SubscriberId (required, guid, `5611a3c1-239d-eb11-8475-20677cddb4f3`) ... Identify Subscriber Id.
+    + Topic%20%20 (required, string, `2-20`) ... Identify Topic.
+
++ Response 200 (application/json; charset=utf-8)
+    + Attributes (Subscription Detail)
+
++ Response 400 (application/json)
+    + Attributes (400 BadRequestResponse)
+
++ Response 405 (application/json)
+    + Attributes (405 MethodNotAllowed)
+
+
+## Subscriptions for Subscriber Delete [/Subscriptions/{SubscriberId%20}]
+`DELETE` Delete all Subscriptions for Subscriber
+
+### Delete all Subscriptions for Subscriber [DELETE]
+
+<b>URI Parameters</b>
+|Property|Description|Type|Max Length|Notes|Constraint|
+|--------|-----------|----|----------|-----|----------|
+|SubscriberId|Subscriber ID|`guid`|||Required|
+
+<b>Response Data</b>
+|Property|Description|Type|Max Length|Notes|Constraint|
+|--------|-----------|----|----------|-----|----------|
+|SubscriberId|Subscriber ID|`guid`||||
+|Topic|Topic|`string`||||
+
+
++ Request (application/json)
+    + Header
+
+            AccessToken:Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1bmlxdWVfbmFtZSI6ImRlZXBhayIsInN1YiI6ImRlZXBhayIsInJvbGUiOlsiNzk5YjhhNDEtYWI0ZS00MTBhLWI5MTktYzU3ZWFlMmFlMDI5IiwiZGVlcGFrIiwiQVNQLk5FVCBJZGVudGl0eSIsIjViNDE4ODE2LTI3ZjQtNGRlOC1iNmMyLTJlZTcxNjI3ZmJmYyIsIkFkbWluIiwiU3VwZXJBZG1pbiJdLCJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMjciLCJhdWQiOiI4MjkzNjk0MjJmNzA0NTIzODUxZDk4NTU2YjZkNTQyYiIsImV4cCI6MTQ1OTQzMjk0MSwibmJmIjoxNDU5NDMxMTQxfQ.JgPGxt0Ok5baKx0YMXlO6D9kUYrCWM-Kma9b9iMW8tg
+
++ Parameters
+    + SubscriberId%20 (required, guid, `5611a3c1-239d-eb11-8475-20677cddb4f3`) ... Identify Subscriber Id.
+
++ Response 200 (application/json; charset=utf-8)
+    + Attributes (array [Subscription Detail])
+
++ Response 400 (application/json)
+    + Attributes (400 BadRequestResponse)
+
++ Response 405 (application/json)
+    + Attributes (405 MethodNotAllowed)
+
 
 # Data Structures
 
@@ -382,6 +578,10 @@ Model Header containing AccessToken
 ## Subscriber Detail (object)
 + SubscriberId: `5611a3c1-239d-eb11-8475-20677cddb4f3` (string)
 + SubscriberName: Subscriber One (string)
+
+## Subscription Detail (object)
++ SubscriberId: `5611a3c1-239d-eb11-8475-20677cddb4f3` (string)
++ Topic: `2-20` (string)
 
 ## Topic Detail (object)
 + TopicName: `2-20` (string)
