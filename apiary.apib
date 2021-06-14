@@ -211,7 +211,7 @@ Model Header containing AccessToken
             AccessToken:Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1bmlxdWVfbmFtZSI6ImRlZXBhayIsInN1YiI6ImRlZXBhayIsInJvbGUiOlsiNzk5YjhhNDEtYWI0ZS00MTBhLWI5MTktYzU3ZWFlMmFlMDI5IiwiZGVlcGFrIiwiQVNQLk5FVCBJZGVudGl0eSIsIjViNDE4ODE2LTI3ZjQtNGRlOC1iNmMyLTJlZTcxNjI3ZmJmYyIsIkFkbWluIiwiU3VwZXJBZG1pbiJdLCJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMjciLCJhdWQiOiI4MjkzNjk0MjJmNzA0NTIzODUxZDk4NTU2YjZkNTQyYiIsImV4cCI6MTQ1OTQzMjk0MSwibmJmIjoxNDU5NDMxMTQxfQ.JgPGxt0Ok5baKx0YMXlO6D9kUYrCWM-Kma9b9iMW8tg
 
 + Parameters
-    + TopicName%20 (required, string, `2-21`) ... Identify topic name.
+    + TopicName%20 (required, string, `2-220`) ... Identify topic name.
 
 + Response 201 (application/json; charset=utf-8)
     + Attributes (Topic Detail)
@@ -245,7 +245,7 @@ Model Header containing AccessToken
             AccessToken:Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1bmlxdWVfbmFtZSI6ImRlZXBhayIsInN1YiI6ImRlZXBhayIsInJvbGUiOlsiNzk5YjhhNDEtYWI0ZS00MTBhLWI5MTktYzU3ZWFlMmFlMDI5IiwiZGVlcGFrIiwiQVNQLk5FVCBJZGVudGl0eSIsIjViNDE4ODE2LTI3ZjQtNGRlOC1iNmMyLTJlZTcxNjI3ZmJmYyIsIkFkbWluIiwiU3VwZXJBZG1pbiJdLCJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMjciLCJhdWQiOiI4MjkzNjk0MjJmNzA0NTIzODUxZDk4NTU2YjZkNTQyYiIsImV4cCI6MTQ1OTQzMjk0MSwibmJmIjoxNDU5NDMxMTQxfQ.JgPGxt0Ok5baKx0YMXlO6D9kUYrCWM-Kma9b9iMW8tg
 
 + Parameters
-    + TopicName%20%20 (required, string, `2-21`) ... Identify specific topic name.
+    + TopicName%20%20 (required, string, `2-220`) ... Identify specific topic name.
 
 + Response 200 (application/json; charset=utf-8)
     + Attributes (Topic Detail)
@@ -480,7 +480,7 @@ Model Header containing AccessToken
 
 + Parameters
     + SubscriberId (required, guid, `5611a3c1-239d-eb11-8475-20677cddb4f3`) ... Identify specific subscriber ID.
-    + Timeout (string, `?timeout=5`) ... include timeout in seconds.
+    + Timeout (optional, string, `?timeout=5`) ... include timeout in seconds.
 
 
 + Response 200 (application/json; charset=utf-8)
