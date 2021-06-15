@@ -588,6 +588,7 @@ Model Header containing AccessToken
     + MessageId (required, guid, `cca4fd86-1bcd-eb11-847b-20677cddb4f2`) ... Identify specific message ID.
 
 + Response 200 (application/json; charset=utf-8)
+    + Attributes (V1Subscribe Detail)
 
 + Response 400 (application/json)
     + Attributes (400 BadRequestResponse)
@@ -796,4 +797,31 @@ Model Header containing AccessToken
 
 ## Topic Detail (object)
 + TopicName: `2-220` (string)
+
+## V1DebugMessage (object)
++ Messages (array [V1DebugMessageMessage])
++ Accepted: true (boolean)
++ HasErrors: true (boolean)
++ HasWarnings: true (boolean)
+
+## V1DebugMessageMessage (object)
++ Status: 0 (number)
++ MsgText: Message Error (string)
++ ErrorType: 1 (number)
++ ITASError (V1DebugItasError)
+
+## V1DebugItasError (object)
++ Description: Error One (string)
++ Code: 1 (number)
++ Message: A Problem Exists (string)
+
+## V1Subscribe Detail (object)
++ SubscriberId: `5611a3c1-239d-eb11-8475-20677cddb4f3` (string)
++ Name: Subscriber One (string)
++ ServiceResult (V1ServiceResult)
+
+## V1ServiceResult (object)
++ Error: Error Message (string)
++ StatusCode: 0 (string)
++ DebugMessage (V1DebugMessage)
 
