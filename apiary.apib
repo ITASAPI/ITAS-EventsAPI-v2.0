@@ -955,7 +955,7 @@ Model Header containing AccessToken
 + Response 405 (application/json)
     + Attributes (405 MethodNotAllowed)
 
-## Alert Topic Unsubscribe [/Events/Unsubscribe?SubscriberId={SubscriberId}&Topic={TopicId}&CompanyCode={CompanyCode}]
+## Alert Topic Unsubscribe [/Events/Unsubscribe?SubscriberId={SubscriberId}&Topic={Topic}&CompanyCode={CompanyCode}]
 `POST` Unsubscribe from alerts for this topic
 
 ### Unsubscribe Alert Topic [POST]
@@ -1024,6 +1024,11 @@ Model Header containing AccessToken
 |Topic|Topic|`string`|||Required|
 |UpdateUser|Update User|`string`|||Required|
 
+<b>Response Body</b>
+|Property|Description|Type|Max Length|Notes|Constraint|
+|--------|-----------|----|----------|-----|----------|
+|MessageId|Message ID|`guid`||||
+
 + Request (application/json)
     + Header
 
@@ -1033,7 +1038,7 @@ Model Header containing AccessToken
 + Parameters
     + CompanyCode (required, string, `GF`) ... Identify specific company code.
     + Topic (required, string, `2-220`) ... Identify specific topic.
-    + UdpateUser (required, string, `JSMITH_HDM`) ... Identify specific User.
+    + UpdateUser (required, string, `JSMITH_HDM`) ... Identify specific User.
 
 + Response 200 (application/json; charset=utf-8)
     + Attributes (V1UnsubscribeAll Detail)
