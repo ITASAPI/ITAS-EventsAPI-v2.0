@@ -21,7 +21,7 @@ Model Header containing AccessToken
 
 ### List Subscribers [GET]
 
-<b>Response Data</b>
+<b>Response Body</b>
 |Property|Description|Type|Max Length|Notes|Constraint|
 |--------|-----------|----|----------|-----|----------|
 |SubscriberId|Subscriber ID|`guid`||||
@@ -46,7 +46,7 @@ Model Header containing AccessToken
 
 ### Read Subscriber [GET]
 
-<b>Response Data</b>
+<b>Response Body</b>
 |Property|Description|Type|Max Length|Notes|Constraint|
 |--------|-----------|----|----------|-----|----------|
 |SubscriberId|Subscriber ID|`guid`||||
@@ -78,7 +78,7 @@ Model Header containing AccessToken
 |--------|-----------|----|----------|-----|----------|
 |SubscriberName|Subscriber Name|`string`|||Required|
 
-<b>Response Data</b>
+<b>Response Body</b>
 |Property|Description|Type|Max Length|Notes|Constraint|
 |--------|-----------|----|----------|-----|----------|
 |SubscriberId|Subscriber ID|`guid`||||
@@ -113,7 +113,7 @@ Model Header containing AccessToken
 |--------|-----------|----|----------|-----|----------|
 |SubscriberName|Subscriber Name|`string`|||Required|
 
-<b>Response Data</b>
+<b>Response Body</b>
 |Property|Description|Type|Max Length|Notes|Constraint|
 |--------|-----------|----|----------|-----|----------|
 |SubscriberId|Subscriber ID|`guid`||||
@@ -145,7 +145,7 @@ Model Header containing AccessToken
 
 ### List Topics [GET]
 
-<b>Response Data</b>
+<b>Response Body</b>
 |Property|Description|Type|Max Length|Notes|Constraint|
 |--------|-----------|----|----------|-----|----------|
 |TopicName|Topic Name|`string`||||
@@ -169,7 +169,7 @@ Model Header containing AccessToken
 
 ### Read Topic [GET]
 
-<b>Response Data</b>
+<b>Response Body</b>
 |Property|Description|Type|Max Length|Notes|Constraint|
 |--------|-----------|----|----------|-----|----------|
 |TopicName|Topic Name|`string`||||
@@ -200,7 +200,7 @@ Model Header containing AccessToken
 |--------|-----------|----|----------|-----|----------|
 |TopicName|Topic Name|`string`|||Required|
 
-<b>Response Data</b>
+<b>Response Body</b>
 |Property|Description|Type|Max Length|Notes|Constraint|
 |--------|-----------|----|----------|-----|----------|
 |TopicName|Topic Name|`string`||||
@@ -234,7 +234,7 @@ Model Header containing AccessToken
 |--------|-----------|----|----------|-----|----------|
 |TopicName|Topic Name|`string`|||Required|
 
-<b>Response Data</b>
+<b>Response Body</b>
 |Property|Description|Type|Max Length|Notes|Constraint|
 |--------|-----------|----|----------|-----|----------|
 |TopicName|Topic Name|`string`||||
@@ -266,7 +266,7 @@ Model Header containing AccessToken
 
 ### List Subscriptions [GET]
 
-<b>Response Data</b>
+<b>Response Body</b>
 |Property|Description|Type|Max Length|Notes|Constraint|
 |--------|-----------|----|----------|-----|----------|
 |SubscriberId|Subscriber ID|`guid`||||
@@ -290,7 +290,7 @@ Model Header containing AccessToken
 
 ### List Subscriptions for Subscriber [GET]
 
-<b>Response Data</b>
+<b>Response Body</b>
 |Property|Description|Type|Max Length|Notes|Constraint|
 |--------|-----------|----|----------|-----|----------|
 |SubscriberId|Subscriber ID|`guid`||||
@@ -320,7 +320,7 @@ Model Header containing AccessToken
 
 ### Read Subscription for Subscriber [GET]
 
-<b>Response Data</b>
+<b>Response Body</b>
 |Property|Description|Type|Max Length|Notes|Constraint|
 |--------|-----------|----|----------|-----|----------|
 |SubscriberId|Subscriber ID|`guid`||||
@@ -354,7 +354,7 @@ Model Header containing AccessToken
 |SubscriberId|Subscriber ID|`guid`|||Required|
 |Topic|Topic|`string`|||Required|
 
-<b>Response Data</b>
+<b>Response Body</b>
 |Property|Description|Type|Max Length|Notes|Constraint|
 |--------|-----------|----|----------|-----|----------|
 |SubscriberId|Subscriber ID|`guid`||||
@@ -391,7 +391,7 @@ Model Header containing AccessToken
 |SubscriberId|Subscriber ID|`guid`|||Required|
 |Topic|Topic|`string`|||Required|
 
-<b>Response Data</b>
+<b>Response Body</b>
 |Property|Description|Type|Max Length|Notes|Constraint|
 |--------|-----------|----|----------|-----|----------|
 |SubscriberId|Subscriber ID|`guid`||||
@@ -427,7 +427,7 @@ Model Header containing AccessToken
 |--------|-----------|----|----------|-----|----------|
 |SubscriberId|Subscriber ID|`guid`|||Required|
 
-<b>Response Data</b>
+<b>Response Body</b>
 |Property|Description|Type|Max Length|Notes|Constraint|
 |--------|-----------|----|----------|-----|----------|
 |SubscriberId|Subscriber ID|`guid`||||
@@ -466,7 +466,7 @@ Model Header containing AccessToken
 |SubscriberId|Subscriber ID|`guid`|||Required|
 |Timeout|Timeout in seconds|`number`||||
 
-<b>Response Data</b>
+<b>Response Body</b>
 |Property|Description|Type|Max Length|Notes|Constraint|
 |--------|-----------|----|----------|-----|----------|
 |MessageId|Message ID|`guid`||||
@@ -675,7 +675,7 @@ Model Header containing AccessToken
 
 
 ## Topic Create [/Events/AddTopic?Topic={Topic}&CompanyCode={CompanyCode}]
-`PUT` Creates Topic id it does not already exist
+`PUT` Creates Topic if it does not already exist
 
 ### Create Topic [PUT]
 
@@ -828,6 +828,126 @@ Model Header containing AccessToken
 
 + Response 201 (application/json; charset=utf-8)
     + Attributes (V1Publish Message Detail)
+
++ Response 400 (application/json)
+    + Attributes (400 BadRequestResponse)
+
++ Response 405 (application/json)
+    + Attributes (405 MethodNotAllowed)
+
+## Message Peek [/Events/Peek?SubscriberId={SubscriberId}&Timeout={Timeout}]
+`GET` Get the first available message, or wait until a message becomes available for a timeout window
+
+### Peek Message [GET]
+
+<b>URI Parameters</b>
+|Property|Description|Type|Max Length|Notes|Constraint|
+|--------|-----------|----|----------|-----|----------|
+|SubscriberId|Subscriber ID|`guid`|||Required|
+|Timeout|Timeout|`number`||||
+
+<b>Response Body</b>
+|Property|Description|Type|Max Length|Notes|Constraint|
+|--------|-----------|----|----------|-----|----------|
+|MessageId|Message ID|`guid`||||
+|Topic|Topic|`string`||||
+|MessageBody|Message Body|`object`||||
+|EnqueueTime|Enqueue Time|`datetime`||||
+
++ Request (application/json)
+    + Header
+
+            hmac: 123456789ABC987654321CBA12345
+            client: itas
+
++ Parameters
+    + SubscriberId (required, guid, `5611a3c1-239d-eb11-8475-20677cddb4f3`) ... Identify specific subscriber ID.
+    + Timeout (optional, string, `?timeout=5`) ... Set timeout in seconds.
+
++ Response 200 (application/json; charset=utf-8)
+    + Attributes (V1Peek Detail)
+
++ Response 400 (application/json)
+    + Attributes (400 BadRequestResponse)
+
++ Response 405 (application/json)
+    + Attributes (405 MethodNotAllowed)
+
+## Message Receive [/Events/Receive?SubscriberId={SubscriberId}&MessageId={MessageId}&LockTimeout={LockTimeout}]
+`POST` Receive a message for processing for a window of time
+
+### Receive Message [POST]
+
+<b>URI Parameters</b>
+|Property|Description|Type|Max Length|Notes|Constraint|
+|--------|-----------|----|----------|-----|----------|
+|SubscriberId|Subscriber ID|`guid`|||Required|
+|MessageId|Message ID|`guid`|||Required|
+|LockTimeout|Lock Timeout|`number`||||
+
+<b>Response Body</b>
+|Property|Description|Type|Max Length|Notes|Constraint|
+|--------|-----------|----|----------|-----|----------|
+|MessageId|Message ID|`guid`||||
+|LockId|Lock ID|`guid`||||
+|Topic|Topic|`string`||||
+|CompanyCode|Company Code|`string`||||
+|MessageType|Message Type|`string`||||
+|MessageBody|Message Body|`object`||||
+|EnqueueTime|Enqueue Time|`datetime`||||
+|ServiceResult|Service Result|`object`||||
+
++ Request (application/json)
+    + Header
+
+            hmac: 123456789ABC987654321CBA12345
+            client: itas
+
++ Parameters
+    + SubscriberId (required, guid, `5611a3c1-239d-eb11-8475-20677cddb4f3`) ... Identify specific subscriber id.
+    + MessageId (required, guid, `7237a7f9-d6cd-eb11-847b-20677cddb4f2`) ... Identify specific message id.
+    + LockTimeout (optional, number, 5) ... Set lock timeout in seconds.
+
++ Response 200 (application/json; charset=utf-8)
+    + Attributes (V1ReceiveMessage Detail)
+
++ Response 400 (application/json)
+    + Attributes (400 BadRequestResponse)
+
++ Response 405 (application/json)
+    + Attributes (405 MethodNotAllowed)
+
+## Message Confirm [/Events/Confirm?SubscriberId={SubscriberId}&MessageId={MessageId}&LockId={LockId}]
+`DELETE` Confirm successful receipt of message
+
+### Confirm Message [DELETE]
+
+<b>URI Parameters</b>
+|Property|Description|Type|Max Length|Notes|Constraint|
+|--------|-----------|----|----------|-----|----------|
+|SubscriberId|Subscriber ID|`guid`|||Required|
+|MessageId|Message ID|`guid`|||Required|
+|LockId|Lock ID|`guid`||||
+
+<b>Response Body</b>
+|Property|Description|Type|Max Length|Notes|Constraint|
+|--------|-----------|----|----------|-----|----------|
+|MessageId|Message ID|`guid`||||
+
+
++ Request (application/json)
+    + Header
+
+            hmac: 123456789ABC987654321CBA12345
+            client: itas
+
++ Parameters
+    + SubscriberId (required, guid, `5611a3c1-239d-eb11-8475-20677cddb4f3`) ... Identify specific subscriber id.
+    + MessageId (required, guid, `7237a7f9-d6cd-eb11-847b-20677cddb4f2`) ... Identify specific message id.
+    + LockId (required, guid, `a00c77a6-dccd-eb11-847b-20677cddb4f2`) ... Set lock timeout in seconds.
+
++ Response 200 (application/json; charset=utf-8)
+    + Attributes (V1Confirm Detail)
 
 + Response 400 (application/json)
     + Attributes (400 BadRequestResponse)
@@ -994,6 +1114,7 @@ Model Header containing AccessToken
 + MessageId: `cca4fd86-1bcd-eb11-847b-20677cddb4f2` (string)
 + Topic: `2-220` (string)
 + MessageBody (MessageBody)
++ EnqueueTime: `2021-06-15T12:41:19.167` (string)
 
 ## Subscriber Detail (object)
 + SubscriberId: `5611a3c1-239d-eb11-8475-20677cddb4f3` (string)
@@ -1023,10 +1144,33 @@ Model Header containing AccessToken
 + Code: 1 (number)
 + Message: A Problem Exists (string)
 
+## V1Message Body (object)
++ Tid: `TID-010`
++ InnerBody (InnerMessageBody)
+
+## V1Confirm Detail (string)
++ 7237a7f9-d6cd-eb11-847b-20677cddb4f2
+
+## V1Peek Detail (object)
++ NextMessageId: `FC5E248A-DEBF-EB11-847B-20677CDDB4F2` (string)
++ SubscriberId: `5611a3c1-239d-eb11-8475-20677cddb4f3` (string)
++ MessageCount: 1 (number)
++ ServiceResult (V1ServiceResult)
+
 ## V1Publish Message Detail (object)
 + Message: Published (string)
 + CompanyCode: GF (string)
 + Topic: `2-220` (string)
+
+## V1ReceiveMessage Detail (object)
++ MessageId: `cca4fd86-1bcd-eb11-847b-20677cddb4f2` (string)
++ LockId: `a00c77a6-dccd-eb11-847b-20677cddb4f2` (string)
++ Topic: `2-220` (string)
++ CompanyCode: GF (string)
++ MessageType: `{ITASMessage}` (string)
++ MessageBody (V1Message Body)
++ EnqueueTime: `2021-06-15T12:41:19.167` (string)
++ ServiceResult (V1ServiceResult)
 
 ## V1ServiceResult (object)
 + Error: Error Message (string)
