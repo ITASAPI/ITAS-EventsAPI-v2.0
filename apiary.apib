@@ -994,7 +994,7 @@ Model Header containing AccessToken
 <b>URI Parameters</b>
 |Property|Description|Type|Max Length|Notes|Constraint|
 |--------|-----------|----|----------|-----|----------|
-|SubscriberID|Subscriber ID|`guid`|||Required|
+|SubscriberId|Subscriber ID|`guid`|||Required|
 
 + Request (application/json)
     + Header
@@ -1006,6 +1006,37 @@ Model Header containing AccessToken
     + SubscriberId (required, guid, `5611a3c1-239d-eb11-8475-20677cddb4f3`) ... Identify specific subscriber id.
 
 + Response 200 (application/json; charset=utf-8)
+
++ Response 400 (application/json)
+    + Attributes (400 BadRequestResponse)
+
++ Response 405 (application/json)
+    + Attributes (405 MethodNotAllowed)
+
+## Unsubscribe All [/Events/UnsubscribeAll?CompanyCode={CompanyCode}&Topic={Topic}&UpdateUser={UpdateUser}]
+`POST` Clear all subscriptions to an alert queue
+
+### Unsubscribe All
+<b>URI Parameters</b>
+|Property|Description|Type|Max Length|Notes|Constraint|
+|--------|-----------|----|----------|-----|----------|
+|ComapanyCode|Company Code|`string`|||Required|
+|Topic|Topic|`string`|||Required|
+|UpdateUser|Update User|`string`|||Required|
+
++ Request (application/json)
+    + Header
+
+            hmac: 123456789ABC987654321CBA12345
+            client: itas
+
++ Parameters
+    + CompanyCode (required, string, `GF`) ... Identify specific company code.
+    + Topic (required, string, `2-220`) ... Identify specific topic.
+    + UdpateUser (required, string, `JSMITH_HDM`) ... Identify specific User.
+
++ Response 200 (application/json; charset=utf-8)
+    + Attributes (V1UnsubscribeAll Detail)
 
 + Response 400 (application/json)
     + Attributes (400 BadRequestResponse)
@@ -1247,3 +1278,8 @@ Model Header containing AccessToken
 + Name: `2-220` (string)
 + SubscriberCount: 1 (number)
 + ServiceResult (V1ServiceResult)
+
+## V1UnsubscribeAll Detail (object)
++ SubscriberCount: 3 (string)
++ CompanyCode: GF (string)
++ Topic: `2-220` (string)
