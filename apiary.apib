@@ -635,8 +635,86 @@ Model Header containing AccessToken
 + Response 405 (application/json)
     + Attributes (405 MethodNotAllowed)
 
+## Topic [/Events/GetTopic?Topic={Topic}&CompanyCode={CompanyCode}]
+`GET` Information about a Topic
 
-## Alert Subscribe [/Events/Subscribe?SubscriberId={SubscriberId}&topic={Topic}&CompanyCode={CompanyCode}]
+### Read Topic [GET]
+
+<b>URI Parameters</b>
+|Property|Description|Type|Max Length|Notes|Constraint|
+|--------|-----------|----|----------|-----|----------|
+|Topic|Topic|`string`|||Required|
+|CompanyCode|Company Code|`string`|||Required|
+
+<b>Response Body</b>
+|Property|Description|Type|Max Length|Notes|Constraint|
+|--------|-----------|----|----------|-----|----------|
+|TopicId|Topic ID|`guid`||||
+|Name|Name|`string`||||
+|SubscriberCount|Subscriber Count|`number`||||
+|ServiceResult|Service Result|`object`||||
+
++ Request (application/json)
+    + Header
+
+            hmac: 123456789ABC987654321CBA12345
+            client: itas
+
++ Parameters
+    + Topic (required, string, `2-220`) ... Identify specific topic.
+    + CompanyCode (required, string, `GF`) ... Identify specific company code.
+
++ Response 200 (application/json; charset=utf-8)
+    + Attributes (V1Topic Detail)
+
++ Response 400 (application/json)
+    + Attributes (400 BadRequestResponse)
+
++ Response 405 (application/json)
+    + Attributes (405 MethodNotAllowed)
+
+
+## Topic Create [/Events/AddTopic?Topic={Topic}&CompanyCode={CompanyCode}]
+`PUT` Creates Topic id it does not already exist
+
+### Create Topic [PUT]
+
+<b>URI Parameters</b>
+|Property|Description|Type|Max Length|Notes|Constraint|
+|--------|-----------|----|----------|-----|----------|
+|Topic|Topic|`string`|||Required|
+|CompanyCode|Company Code|`string`|||Required|
+
+<b>Response Body</b>
+|Property|Description|Type|Max Length|Notes|Constraint|
+|--------|-----------|----|----------|-----|----------|
+|TopicId|Topic ID|`guid`||||
+|Name|Name|`string`||||
+|SubscriberCount|Subscriber Count|`number`||||
+|ServiceResult|Service Result|`object`||||
+
++ Request (application/json)
+    + Header
+
+            hmac: 123456789ABC987654321CBA12345
+            client: itas
+
++ Parameters
+    + Topic (required, string, `2-220`) ... Identify specific topic.
+    + CompanyCode (required, string, `GF`) ... Identify specific company code.
+
++ Response 200 (application/json; charset=utf-8)
+    + Attributes (V1Topic Detail)
+
++ Response 400 (application/json)
+    + Attributes (400 BadRequestResponse)
+
++ Response 405 (application/json)
+    + Attributes (405 MethodNotAllowed)
+
+
+
+## Subscription Create [/Events/Subscribe?SubscriberId={SubscriberId}&topic={Topic}&CompanyCode={CompanyCode}]
 `POST` Subscribe to an Alert for a Topic
 
 ### Create Subscription [POST]
@@ -703,8 +781,53 @@ Model Header containing AccessToken
 + Parameters
     + SubscriberId (required, guid, `5611a3c1-239d-eb11-8475-20677cddb4f3`) ... Identify specific subscriber id.
 
-+ Response 201 (application/json; charset=utf-8)
++ Response 200 (application/json; charset=utf-8)
     + Attributes (array [V1Subscription Detail])
+
++ Response 400 (application/json)
+    + Attributes (400 BadRequestResponse)
+
++ Response 405 (application/json)
+    + Attributes (405 MethodNotAllowed)
+
+## Publish Message [/Events/Publish?CompanyCode={CompanyCode}&Topic={Topic}]
+`PUT` Publish a Message to an Alert Queue
+
+### Publish Message [PUT]
+
+<b>URI Parameters</b>
+|Property|Description|Type|Max Length|Notes|Constraint|
+|--------|-----------|----|----------|-----|----------|
+|CompanyCode|Company Code|`string`|||Required|
+|Topic|Topic|`string`|||Required|
+
+<b>Request Body Example</b>
+|Property|Description|Type|Max Length|Notes|Constraint|
+|--------|-----------|----|----------|-----|----------|
+|TID|TID|`string`|||Required|
+|Topic|Topic|`string`|||Required|
+|InnerBody|Inner Body|`object`|||Required|
+
+
+<b>Response Body</b>
+|Property|Description|Type|Max Length|Notes|Constraint|
+|--------|-----------|----|----------|-----|----------|
+|Message|Message|`string`||||
+|CompanyCode|Company Code|`string`||||
+|Topic|Topic|`string`||||
+
++ Request (application/json)
+    + Header
+
+            hmac: 123456789ABC987654321CBA12345
+            client: itas
+
++ Parameters
+    + CompanyCode (required, string, `GF`) ... Identify specific company code.
+    + Topic (required, string, `2-220`) ... Identify specific topic.
+
++ Response 201 (application/json; charset=utf-8)
+    + Attributes (V1Publish Message Detail)
 
 + Response 400 (application/json)
     + Attributes (400 BadRequestResponse)
@@ -900,6 +1023,11 @@ Model Header containing AccessToken
 + Code: 1 (number)
 + Message: A Problem Exists (string)
 
+## V1Publish Message Detail (object)
++ Message: Published (string)
++ CompanyCode: GF (string)
++ Topic: `2-220` (string)
+
 ## V1ServiceResult (object)
 + Error: Error Message (string)
 + StatusCode: 0 (string)
@@ -916,3 +1044,8 @@ Model Header containing AccessToken
 + CompanyCode: GF (string)
 + ServiceResult (V1ServiceResult)
 
+## V1Topic Detail (object)
++ TopicId: `4711a3c1-239d-eb11-8475-20677cddb4f3` (string)
++ Name: `2-220` (string)
++ SubscriberCount: 1 (number)
++ ServiceResult (V1ServiceResult)
