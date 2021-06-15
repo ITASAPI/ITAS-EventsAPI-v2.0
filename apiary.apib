@@ -1016,7 +1016,8 @@ Model Header containing AccessToken
 ## Unsubscribe All [/Events/UnsubscribeAll?CompanyCode={CompanyCode}&Topic={Topic}&UpdateUser={UpdateUser}]
 `POST` Clear all subscriptions to an alert queue
 
-### Unsubscribe All
+### Unsubscribe All [POST]
+
 <b>URI Parameters</b>
 |Property|Description|Type|Max Length|Notes|Constraint|
 |--------|-----------|----|----------|-----|----------|
@@ -1043,6 +1044,11 @@ Model Header containing AccessToken
 + Response 200 (application/json; charset=utf-8)
     + Attributes (V1UnsubscribeAll Detail)
 
++ Response 400 (application/json)
+    + Attributes (400 BadRequestResponse)
+
++ Response 405 (application/json)
+    + Attributes (405 MethodNotAllowed)
 
 
 # Data Structures
