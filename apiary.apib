@@ -601,7 +601,7 @@ Model Header containing AccessToken
 # Group Migrated Events v1 Endpoints
 
 ## Mailbox Create [/Events/Register?SubscriberName={SubscriberName}]
-`POST` Create Mailbox
+`POST` Create a Mailbox to receive alerts
 
 ### Create Mailbox [POST]
 
@@ -626,7 +626,7 @@ Model Header containing AccessToken
 + Parameters
     + SubscriberName (required, string, `Subscriber One`) ... Identify specific subscriber name.
 
-+ Response 200 (application/json; charset=utf-8)
++ Response 201 (application/json; charset=utf-8)
     + Attributes (V1Subscribe Detail)
 
 + Response 400 (application/json)
@@ -634,6 +634,84 @@ Model Header containing AccessToken
 
 + Response 405 (application/json)
     + Attributes (405 MethodNotAllowed)
+
+
+## Alert Subscribe [/Events/Subscribe?SubscriberId={SubscriberId}&topic={Topic}&CompanyCode={CompanyCode}]
+`POST` Subscribe to an Alert for a Topic
+
+### Create Subscription [POST]
+
+<b>URI Parameters</b>
+|Property|Description|Type|Max Length|Notes|Constraint|
+|--------|-----------|----|----------|-----|----------|
+|SubscriberID|Subscriber ID|`guid`|||Required|
+|Topic|Topic|`string`|||Required|
+|CompanyCode|Company Code|`string`|||Required|
+
+<b>Response Body</b>
+|Property|Description|Type|Max Length|Notes|Constraint|
+|--------|-----------|----|----------|-----|----------|
+|SubscriberID|Subscriber ID|`guid`||||
+|Topic|Topic|`string`||||
+|CompanyCode|Company Code|`string`||||
+|ServiceResult|Service Result|`object`||||
+
++ Request (application/json)
+    + Header
+
+            hmac: 123456789ABC987654321CBA12345
+            client: itas
+
++ Parameters
+    + SubscriberId (required, guid, `5611a3c1-239d-eb11-8475-20677cddb4f3`) ... Identify specific subscriber id.
+    + Topic (required, string, `2-220`) ... Identify specific topic.
+    + CompanyCode (required, string, `GF`) ... Identify specific company code.
+
++ Response 201 (application/json; charset=utf-8)
+    + Attributes (V1Subscription Detail)
+
++ Response 400 (application/json)
+    + Attributes (400 BadRequestResponse)
+
++ Response 405 (application/json)
+    + Attributes (405 MethodNotAllowed)
+
+## Subscriptions List [/Events/ViewSubscriptions?SubscriberId={SubscriberId}]
+`GET` View Active Subscriptions for a Subscriber
+
+### List Subscriptions [GET]
+
+<b>URI Parameters</b>
+|Property|Description|Type|Max Length|Notes|Constraint|
+|--------|-----------|----|----------|-----|----------|
+|SubscriberID|Subscriber ID|`guid`|||Required|
+
+<b>Response Body</b>
+|Property|Description|Type|Max Length|Notes|Constraint|
+|--------|-----------|----|----------|-----|----------|
+|SubscriberID|Subscriber ID|`guid`||||
+|Topic|Topic|`string`||||
+|CompanyCode|Company Code|`string`||||
+|ServiceResult|Service Result|`object`||||
+
++ Request (application/json)
+    + Header
+
+            hmac: 123456789ABC987654321CBA12345
+            client: itas
+
++ Parameters
+    + SubscriberId (required, guid, `5611a3c1-239d-eb11-8475-20677cddb4f3`) ... Identify specific subscriber id.
+
++ Response 201 (application/json; charset=utf-8)
+    + Attributes (array [V1Subscription Detail])
+
++ Response 400 (application/json)
+    + Attributes (400 BadRequestResponse)
+
++ Response 405 (application/json)
+    + Attributes (405 MethodNotAllowed)
+
 
 # Data Structures
 
@@ -822,13 +900,19 @@ Model Header containing AccessToken
 + Code: 1 (number)
 + Message: A Problem Exists (string)
 
+## V1ServiceResult (object)
++ Error: Error Message (string)
++ StatusCode: 0 (string)
++ DebugMessage (V1DebugMessage)
+
 ## V1Subscribe Detail (object)
 + SubscriberId: `5611a3c1-239d-eb11-8475-20677cddb4f3` (string)
 + Name: Subscriber One (string)
 + ServiceResult (V1ServiceResult)
 
-## V1ServiceResult (object)
-+ Error: Error Message (string)
-+ StatusCode: 0 (string)
-+ DebugMessage (V1DebugMessage)
+## V1Subscription Detail (object)
++ SubscriberId: `5611a3c1-239d-eb11-8475-20677cddb4f3` (string)
++ Topic: `2-220` (string)
++ CompanyCode: GF (string)
++ ServiceResult (V1ServiceResult)
 
