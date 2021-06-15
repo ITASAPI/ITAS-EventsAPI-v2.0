@@ -955,6 +955,63 @@ Model Header containing AccessToken
 + Response 405 (application/json)
     + Attributes (405 MethodNotAllowed)
 
+## Alert Topic Unsubscribe [/Events/Unsubscribe?SubscriberId={SubscriberId}&Topic={TopicId}&CompanyCode={CompanyCode}]
+`POST` Unsubscribe from alerts for this topic
+
+### Unsubscribe Alert Topic [POST]
+
+<b>URI Parameters</b>
+|Property|Description|Type|Max Length|Notes|Constraint|
+|--------|-----------|----|----------|-----|----------|
+|SubscriberID|Subscriber ID|`guid`|||Required|
+|Topic|Topic|`string`|||Required|
+|CompanyCode|Company Code|`string`|||Required|
+
++ Request (application/json)
+    + Header
+
+            hmac: 123456789ABC987654321CBA12345
+            client: itas
+
++ Parameters
+    + SubscriberId (required, guid, `5611a3c1-239d-eb11-8475-20677cddb4f3`) ... Identify specific subscriber id.
+    + Topic (required, string, `2-220`) ... Identify specific topic.
+    + CompanyCode (required, string, `GF`) ... Identify specific company code.
+
++ Response 200 (application/json; charset=utf-8)
+
++ Response 400 (application/json)
+    + Attributes (400 BadRequestResponse)
+
++ Response 405 (application/json)
+    + Attributes (405 MethodNotAllowed)
+
+## Subscriber Unregister [/Events/Unregister?SubscriberId={SubscriberId}]
+`DELETE` Unregister a subscriber and delete all their associated subscriptions and messages
+
+### Unregister Subscriber [DELETE]
+
+<b>URI Parameters</b>
+|Property|Description|Type|Max Length|Notes|Constraint|
+|--------|-----------|----|----------|-----|----------|
+|SubscriberID|Subscriber ID|`guid`|||Required|
+
++ Request (application/json)
+    + Header
+
+            hmac: 123456789ABC987654321CBA12345
+            client: itas
+
++ Parameters
+    + SubscriberId (required, guid, `5611a3c1-239d-eb11-8475-20677cddb4f3`) ... Identify specific subscriber id.
+
++ Response 200 (application/json; charset=utf-8)
+
++ Response 400 (application/json)
+    + Attributes (400 BadRequestResponse)
+
++ Response 405 (application/json)
+    + Attributes (405 MethodNotAllowed)
 
 # Data Structures
 
